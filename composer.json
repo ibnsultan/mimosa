@@ -1,0 +1,16 @@
+{
+    "name": "ibnsultan/mimosa",
+    "description": "a minimalistic PHP+reactJS Combo",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "jenssegers/blade": "^2.0",
+        "ibnsultan/whoops": "dev-master",
+        "clue/framework-x": "dev-main"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app"
+        }
+    }
+}
