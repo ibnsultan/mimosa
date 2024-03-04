@@ -4,40 +4,44 @@ A minimalist php + reactJS combo
 
 It is designed to seamlessly integrate PHP and ReactJS without the need for complete separation between frontend and backend layers.
 
+## Example
+
 ```js
-@extends('layouts.app')
+{{-- Screen/Components.blade.jsx --}}
 
-@section('components')
-    var owner = 'Hedy Lamarr';
-    var initialTodos = JSON.parse('{!! json_encode($todos) !!}');
+var owner = 'Hedy Lamarr';
+var initialTodos = JSON.parse('{!! json_encode($todos) !!}');
 
-    const TodoApp = () => {
-        const [todos, setTodos] = React.useState(initialTodos);
+const TodoApp = () => {
+    const [todos, setTodos] = React.useState(initialTodos);
 
-        const TodoFormSubmit = (e) => {
-            e.preventDefault();
-            const newTodo = e.target.elements.todo.value;
-            setTodos([...todos, newTodo]);
-            e.target.reset(); // Reset the form after submission
-        };
+    const TodoFormSubmit = (e) => {
+        e.preventDefault();
+        const newTodo = e.target.elements.todo.value;
+        setTodos([...todos, newTodo]);
+        e.target.reset(); // Reset the form after submission
+    };
 
-        return (
-            <div>
-                <ul id="toDoList">
-                    {todos.map((todo, index) => (
-                        <li key={index}>{todo}</li>
-                    ))}
-                </ul>
-                <form onSubmit={TodoFormSubmit}>
-                    <input type="text" name="todo" placeholder="Add a todo" />
-                    <button type="submit">Add</button>
-                </form>
-            </div>
-        );
-    };  
-@endsection
+    return (
+        <div>
+            <ul id="toDoList">
+                {todos.map((todo, index) => (
+                    <li key={index}>{todo}</li>
+                ))}
+            </ul>
+            <form onSubmit={TodoFormSubmit}>
+                <input type="text" name="todo" placeholder="Add a todo" />
+                <button type="submit">Add</button>
+            </form>
+        </div>
+    );
+}
+```
 
-@section('content')
+```php-template
+{{-- Screen/Main.blade.php --}}
+
+@section('jsx')
     <div>
         <h1> {owner} </h1>
   
@@ -67,4 +71,4 @@ The toolset is literally a couple days old, so I would not advice anyone to use 
 
 ## Contributions
 
-Opinions, suggestion, pull requests, and obviously money too 😀
+Opinions, suggestion, pull requests, and anything of value
