@@ -16,23 +16,23 @@
 
     <!-- stylesheets -->
     <link rel="stylesheet" href="/assets/css/styles.css">
-</head>
+</head> 
 <body>
+
+    
     <div id="root"></div>
 
     <script type="text/babel">
 
-        @include('layouts.components.global')
-
-        @yield('components')
+        @include('layouts.components.global');
+        @if(!is_null($screenComponents)) @include($screenComponents); @endif
 
         const App = () => {
             return (
                 <div className="container">
 
                     <Header />
-
-                    @yield('content')
+                    @yield('jsx')
                     
                 </div>
             );

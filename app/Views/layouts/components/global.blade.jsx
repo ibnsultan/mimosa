@@ -1,3 +1,10 @@
+function addClassesToBody(classes) {
+    var body = document.querySelector('body');
+    body.classList.add(...classes.split(' '));
+}
+
+addClassesToBody("flex center-all h-screen");
+
 const Header = () => {
 
     return (
