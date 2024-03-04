@@ -38,7 +38,7 @@ const TodoApp = () => {
 }
 ```
 
-```php-template
+```html
 {{-- Screen/Main.blade.php --}}
 
 @section('jsx')
@@ -59,7 +59,7 @@ const TodoApp = () => {
 
 ## Disclaimer
 
-The toolset is literally a couple days old, so I would not advice anyone to use this framework in production environment or with major projects
+The toolset is literally a couple days old, so proceed with caution
 
 ## Credits
 
