@@ -19,14 +19,8 @@ class HomeController extends Mvc
             'descriptions' => $description                
         ];
 
-        return $this->view('home', $data);
+        return $this->render('Home', $data);
 
     }
 
-    public function user($request)
-    {
-        $name = $request->getAttribute('name');
-        
-        return $this->response::plaintext("Hello, $name");
-    }
 }
