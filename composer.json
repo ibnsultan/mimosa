@@ -6,7 +6,8 @@
     "require": {
         "jenssegers/blade": "^2.0",
         "ibnsultan/whoops": "dev-master",
-        "clue/framework-x": "dev-main"
+        "clue/framework-x": "dev-main",
+        "vlucas/phpdotenv": "^5.6"
     },
     "autoload": {
         "psr-4": {
