@@ -4,6 +4,10 @@ A minimalist php + reactJS combo
 
 It is designed to seamlessly integrate PHP and ReactJS without the need for complete separation between frontend and backend layers.
 
+```
+composer create-project ibnsultan/mimosa YOUR_PROJECT_NAME
+```
+
 ## Example
 
 ```js
