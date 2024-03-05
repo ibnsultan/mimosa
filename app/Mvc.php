@@ -24,11 +24,25 @@ class MVC{
         $this->response = new Response();
     }
 
-    public function render($view, $data = [])
-    {
+    protected function blade()
+    {        
         $blade = new Blade('app/Views', 'app/Cache');
+
+        // add support for jsx files
         $blade->addExtension('blade.jsx', 'blade');
 
+        // react initial state directive @reactInitialize
+        $blade->directive('reactInitialize', function () {
+            
+            return "<?php echo '<script type=\"module\">import \"https://unpkg.com/react@18/umd/react.development.js\";import \"https://unpkg.com/react-dom@18/umd/react-dom.development.js\";import \"https://unpkg.com/@babel/standalone/babel.min.js\";</script>'; ?>";
+
+        });
+
+        return $blade;
+    }
+
+    public function render($view, $data = [])
+    {
         // check if the view is a directory
         $newDir = getcwd() .'/app/Views/'. str_replace('.', '/', $view);
         
@@ -40,7 +54,7 @@ class MVC{
             $data['screenComponents'] = "$components[0].Components";
         endif;
 
-        exit($blade->make($view, $data));
+        exit($this->blade()->make($view, $data));
     }
 
 
