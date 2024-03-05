@@ -1,0 +1,57 @@
+.root{
+	overflow: hidden;
+}
+
+.main{
+	margin-top: 30vh;
+	text-align: center;
+	font-size: 5vw;
+	font-family: cursive;
+}
+
+.main h4{
+	margin-bottom: 0;
+}
+
+.main p{
+	font-size: 20px;
+	max-width: 650px;
+	margin: 5px auto;
+}
+
+header{
+	position: absolute;
+	bottom: 25px;
+	width: 99%;
+	text-align: center;
+}
+
+nav{
+	max-width: 340px;
+    background: #44be6d30;
+    padding: 5px 0;
+    width: 100%;
+    border-radius: 10px;
+    margin: auto;
+}
+
+nav>ul>li{
+	display: inline;
+	margin-right: 20px;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+nav>ul>li:first-child{
+	margin-left: -20px;
+}
+
+nav>ul>li:not(:last-child){
+	border-right: 1px solid #44be6d;
+	padding-right: 20px;
+}
+
+nav>ul>li>a{
+	text-decoration: none;
+	color: #44be6d;
+	font-weight: bold;
+}
