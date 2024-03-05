@@ -1,17 +1,10 @@
-const Cards = () => {
-    return (
-        <div className="flex card mt-3">
-            
-            @foreach($descriptions as $description)
-
-                <p> {{ $description }} </p>
-
-            @endforeach
-
-            <p>, &nbsp;
-                <a href="https://framework-x.org/docs/getting-started/quickstart" target="_blank" className="btn btn-primary">View Documentation</a>
-            </p>
-
+const SampleComponent = (props) => {
+    return (        
+        <div className="main">
+            <div className="spotLight">
+                <h4> {props.title} </h4>
+                <p> {props.description} </p>
+            </div>
         </div>
     );
 }
