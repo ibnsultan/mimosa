@@ -2,43 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{$title}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-
-    <!-- React CDN -->
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-
-    <!-- Babel CDN for JSX -->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
-    <!-- stylesheets -->
-    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/assets/css/app.css">
 </head> 
 <body>
-
     
     <div id="root"></div>
 
+    @reactInitialize
     <script type="text/babel">
 
         @include('layouts.components.global');
         @if(!is_null($screenComponents)) @include($screenComponents); @endif
 
-        const App = () => {
-            return (
-                <div className="container">
+        const App = () => { return ( <> @yield('jsx') </> ); };
 
-                    <Header />
-                    @yield('jsx')
-                    
-                </div>
-            );
-        };
-
-        // Render the component to the DOM
 		const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<App />);
 
