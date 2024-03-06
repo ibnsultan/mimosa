@@ -46,6 +46,18 @@ Dotenv\Dotenv::createImmutable(getcwd())->safeLoad();
 
 /*
 |--------------------------------------------------------------------------
+| Initialize the Database
+|--------------------------------------------------------------------------
+| This class is responsible for initializing the database connection. It
+| is required for all apps that use a database. The database connection
+| is initialized using the Illuminate\Database\Capsule\Manager class.
+|
+*/
+App\Lib\Database::Initialize();
+register_shutdown_function([App\Lib\Database::class, 'Close']);
+
+/*
+|--------------------------------------------------------------------------
 | Load Functions
 |--------------------------------------------------------------------------
 | This file is responsible for loading all the functions in the app/Functions.php
