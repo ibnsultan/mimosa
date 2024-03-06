@@ -1,3 +1,4 @@
 .env
 /vendor/
 /app/Cache/
+*.zip
