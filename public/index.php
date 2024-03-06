@@ -51,6 +51,7 @@ Dotenv\Dotenv::createImmutable(getcwd())->safeLoad();
 | This class is responsible for initializing the database connection. It
 | is required for all apps that use a database. The database connection
 | is initialized using the Illuminate\Database\Capsule\Manager class.
+| and then shut down when the application is finished.
 |
 */
 App\Lib\Database::Initialize();
