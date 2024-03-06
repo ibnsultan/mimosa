@@ -1,6 +1,6 @@
 # Mimosa
 
-A minimalist php + reactJS combo
+A minimalist php + reactJS framework
 
 It is designed to seamlessly integrate PHP and ReactJS without the need for complete separation between frontend and backend layers.
 
@@ -8,70 +8,121 @@ It is designed to seamlessly integrate PHP and ReactJS without the need for comp
 composer create-project ibnsultan/mimosa YOUR_PROJECT_NAME
 ```
 
-## Example
+## Structure
 
-```js
-{{-- Screen/Components.blade.jsx --}}
-
-var owner = 'Hedy Lamarr';
-var initialTodos = JSON.parse('{!! json_encode($todos) !!}');
-
-const TodoApp = () => {
-    const [todos, setTodos] = React.useState(initialTodos);
-
-    const TodoFormSubmit = (e) => {
-        e.preventDefault();
-        const newTodo = e.target.elements.todo.value;
-        setTodos([...todos, newTodo]);
-        e.target.reset(); // Reset the form after submission
-    };
-
-    return (
-        <div>
-            <ul id="toDoList">
-                {todos.map((todo, index) => (
-                    <li key={index}>{todo}</li>
-                ))}
-            </ul>
-            <form onSubmit={TodoFormSubmit}>
-                <input type="text" name="todo" placeholder="Add a todo" />
-                <button type="submit">Add</button>
-            </form>
-        </div>
-    );
-}
 ```
-
-```html
-{{-- Screen/Main.blade.php --}}
-
-@section('jsx')
-    <div>
-        <h1> {owner} </h1>
-  
-        <TodoApp />
-    </div>
-@endsection
+📁 project/
+├── 📁 app/
+│   ├── 📁 controllers/
+│   ├── 📁 lib/
+│   │   └── 🐘 Functions.php
+│   ├── 📁 routes/
+│   │   ├── 🐘 app.php
+│   │   ├── 🐘 web.php
+│   │   └── 🐘 api.php
+│   ├── 📁 views/
+│   │   ├── 📁 Screen/
+│   │   │   ├── 🐘 Main.blade.php
+│   │   │   └── ⚛️ Components.blade.jsx
+│   │   └── 📁 Layouts/
+│   │       ├── 🐘 app.blade.php
+│   │       └── 📁 components/
+│   │           └── ⚛️ global.blade.jsx
+│   └── 🐘 Controller.php
+├── 📁 public/
+│   ├── 📁 assets/
+│   ├── ⚙️ .htaccess
+│   └── 📄 index.php
+├── 📁 vendor/
+├── ⚙️ .env
+├── ⚙️ .htaccess
+├── 📎 composer.json
+└── 📄 index.php
 ```
 
 ## Features
 
-- Routing
-- Autoloading
-- Error Handling
-- ReactJS support
+- [X] Exceptions and Error Handler
+- [X] HTTP Utils (Routing, Response, Requests)
+- [X] Autoloading
+- [ ] Authorization & Authentication
+- [ ] Database Handling
 
-## Disclaimer
+## Basic Usage
 
-The toolset is literally a couple days old, so proceed with caution
+Mimosa is insanely easy to use due to its simplistic and minimalistic design, it already comes in with some basic components implemented in it like routing, a way handle and render requests and responses respectively
 
-## Credits
+## Routing
 
-- Framework X
-- React PHP - low-level library for event-driven programming in PHP
-- Blade Template
-- React JS
-- Me 🤫
+All routes are preload in the `app/routes` directory thefore any file defined in routes would automatically be loaded into your application
+
+Basic Routing
+
+```php
+app->get('/', function(){
+	echo 'hello world!';
+});
+```
+
+Routing with a Class
+
+```php
+app->get('/', 'MyController@index');
+```
+
+## Response
+
+**Markup**
+
+```php
+response()->markup('<h1>Hello</h1>');
+```
+
+**Json**
+
+```php
+response()->json([
+  'status' => 'success',
+  'data' => 'Hello',
+]);
+```
+
+**With Header**
+
+```php
+response()->withHeader('key', 'value')->json([
+  'status' => 'success',
+  'data' => 'Hello',
+]);
+```
+
+**Other Methods**
+
+Responce comes with other methods like `plain`, `xml`, `page`, `download` [etc](https://github.com/ibnsultan/mimosa/wiki)
+
+## Request
+
+The request object provides an interface for accessing and manipulating the current HTTP request being handled by your application, as well as retrieving input, cookies, and files that were submitted with the request.
+
+```php
+request()->get('key');
+```
+
+The request method in request works with all request methods, whether it's get, post or file, it can even get multiple values at once or even suplements a defualt when the value is null.
+
+Multiple
+
+```php
+$data = request()->get(['username', 'password']);
+
+// results: array( 'username' => 'value', 'password' => 'value' )
+```
+
+Some other request methods include `file`, `param`, `try`, `rawData` etc
+
+## Documentation
+
+More will be covered in the Documentation section which is still in preparation, keep your eyes on the [wiki section](https://github.com/ibnsultan/mimosa/wiki)
 
 ## Contributions
 
