@@ -1,0 +1,41 @@
+<?php
+
+return [
+
+    'int' => [ 'type' => 'integer', 'length' => 11 ],
+    'varchar' => [ 'type' => 'string', 'length' => 255 ],
+    'text' => [ 'type' => 'text' ],
+    'timestamp' => [ 'type' => 'timestamp' ],
+    'datetime' => [ 'type' => 'datetime' ],
+    'date' => [ 'type' => 'date' ],
+    'tinyint' => [ 'type' => 'tinyInteger' ],
+    'smallint' => [ 'type' => 'smallInteger' ],
+    'mediumint' => [ 'type' => 'mediumInteger' ],
+    'bigint' => [ 'type' => 'bigInteger' ],
+    'float' => [ 'type' => 'float' ],
+    'double' => [ 'type' => 'double' ],
+    'decimal' => [ 'type' => 'decimal' ],
+    'enum' => [ 'type' => 'enum' ],
+    'json' => [ 'type' => 'json' ],
+    'jsonb' => [ 'type' => 'jsonb' ],
+    'binary' => [ 'type' => 'binary' ],
+    'varbinary' => [ 'type' => 'varbinary' ],
+    'blob' => [ 'type' => 'blob' ],
+    'tinyblob' => [ 'type' => 'tinyBlob' ],
+    'mediumblob' => [ 'type' => 'mediumBlob' ],
+    'longblob' => [ 'type' => 'longBlob' ],
+    'geometry' => [ 'type' => 'geometry' ],
+    'point' => [ 'type' => 'point' ],
+    'linestring' => [ 'type' => 'lineString' ],
+    'polygon' => [ 'type' => 'polygon' ],
+    'multipoint' => [ 'type' => 'multiPoint' ],
+    'multilinestring' => [ 'type' => 'multiLineString' ],
+    'multipolygon' => [ 'type' => 'multiPolygon' ],
+    'geometrycollection' => [ 'type' => 'geometryCollection' ],
+    'year' => [ 'type' => 'year' ],
+    'unsigned' => [ 'type' => 'unsigned' ],
+    'nullable' => [ 'type' => 'nullable' ],
+    'default' => [ 'type' => 'default' ],
+    'autoincrement' => [ 'type' => 'autoIncrement' ]
+
+];
