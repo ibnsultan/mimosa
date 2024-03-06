@@ -13,6 +13,7 @@
     <div id="root"></div>
 
     @reactInitialize
+
     <script type="text/babel">
 
         @include('layouts.components.global');

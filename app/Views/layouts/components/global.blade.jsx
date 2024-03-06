@@ -10,15 +10,12 @@ const Header = () => {
     return (
         <header>
             <nav>
-
                 <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="https://github.com/ibnsultan/mimosa/wiki" target="_blank">Documentation</a></li>
-                    <li><a href="/404">404</a></li>
+                    <li><a to="javascript:void;">PHP</a></li>
+                    <li><a to="javascript:void;">MVC</a></li>
+                    <li><a to="javascript:void;">ReactJS</a></li>
                 </ul>
-
             </nav>
-            
         </header>
     )
 
