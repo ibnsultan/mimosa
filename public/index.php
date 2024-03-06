@@ -2,11 +2,10 @@
 
 /*
 |--------------------------------------------------------------------------
-| Application Entry Point
+| Switch to root path
 |--------------------------------------------------------------------------
-| This file is the entry point for the application. It is responsible for
-| loading the Composer autoloader, loading the environment file, and
-| requiring the routes file.
+| Point to the application root directory so leaf can accurately
+| resolve app paths.
 |
 */
 chdir(dirname(__DIR__));
@@ -26,20 +25,17 @@ require 'vendor/autoload.php';
 |--------------------------------------------------------------------------
 | Load the Environment File
 |--------------------------------------------------------------------------
-| The environment file is responsible for loading any environment variables
-| that are required by the application. This is the first step in the
-| application bootstrapping process, and it is required for all apps.
+| Quickly load the environment file into the application
 |
- */
+*/
 Dotenv\Dotenv::createImmutable(getcwd())->safeLoad();
 
 /*
 |--------------------------------------------------------------------------
 | Exeptions and Error Handling
 |--------------------------------------------------------------------------
-| This file is responsible for setting up the error handling for the
-| application. This includes the handling of any exceptions that are
-| thrown by the application, as well as the handling of any errors.
+| Initialize the Whoops error handler. This will allow us to see a detailed
+| error message when an error occurs in the application.
 |
  */
 (new \Whoops\Run)->pushHandler(new \Whoops\Handler\PrettyPageHandler)->register();
@@ -55,7 +51,6 @@ Dotenv\Dotenv::createImmutable(getcwd())->safeLoad();
 |
 */
 App\Lib\Database::Initialize();
-register_shutdown_function([App\Lib\Database::class, 'Close']);
 
 /*
 |--------------------------------------------------------------------------
@@ -72,8 +67,8 @@ require_once 'app/lib/Functions.php';
 |--------------------------------------------------------------------------
 | Create a Routing Instance
 |--------------------------------------------------------------------------
-| This file is responsible for creating a new instance of the Leaf\Router
-| class. This instance will be used to load the application routes.
+| Define a new instance of the Leaf router and assign it to the constant "app".
+| This instance will be used to define all the routes for the application.
 | 
 */
 define('app', (new class extends Leaf\Router {}) ?? null);
@@ -83,8 +78,10 @@ define('app', (new class extends Leaf\Router {}) ?? null);
 |--------------------------------------------------------------------------
 | Load routing files
 |--------------------------------------------------------------------------
-| This file is responsible for loading all the routes in the app/routes
-| directory and subdirectories.
+| This section is responsible for loading all the routing files in the app/routes
+| directory. The loading is done recursively, so all files in subdirectories
+| will be loaded as well.
+|
 */
 load_dir_files('app/routes');
 
@@ -92,7 +89,7 @@ load_dir_files('app/routes');
 |--------------------------------------------------------------------------
 | Initialize the app
 |--------------------------------------------------------------------------
-| This file is responsible for initializing the application.
-| 
+| This run method brings in all your routes and starts your application
+|
 */
 app->run();
