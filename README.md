@@ -46,7 +46,9 @@ composer create-project ibnsultan/mimosa YOUR_PROJECT_NAME
 - [X] HTTP Utils (Routing, Response, Requests)
 - [X] Autoloading
 - [ ] Authorization & Authentication
-- [ ] Database Handling
+- [ ] Database
+  - [X] Models
+  - [ ] Migrations
 
 ## Basic Usage
 
