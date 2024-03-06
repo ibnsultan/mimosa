@@ -1,0 +1,64 @@
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Load the Composer Autoloader
+|--------------------------------------------------------------------------
+| Composer provides a convenient, automatically generated class loader for
+| our application. We'll require it into the script here so that we
+| don't have to worry about the loading of any our classes "manually".
+|
+*/
+require 'vendor/autoload.php';
+
+/*
+|--------------------------------------------------------------------------
+| Load the Environment File
+|--------------------------------------------------------------------------
+| Quickly load the environment file into the application
+|
+*/
+Dotenv\Dotenv::createImmutable(getcwd())->safeLoad();
+
+/*
+|--------------------------------------------------------------------------
+| Exeptions and Error Handling
+|--------------------------------------------------------------------------
+| Initialize the Whoops error handler. This will allow us to see a detailed
+| error message when an error occurs in the application.
+|
+*/
+(new \Whoops\Run)->pushHandler(new \Whoops\Handler\PlainTextHandler)->register();
+
+
+/*
+|--------------------------------------------------------------------------
+| Initialize the Database
+|--------------------------------------------------------------------------
+| This class is responsible for initializing the database connection. It
+| is required for all apps that use a database. The database connection
+| is initialized using the Illuminate\Database\Capsule\Manager class.
+| and then shut down when the application is finished.
+|
+*/
+App\Lib\Database::Initialize();
+
+/*
+|--------------------------------------------------------------------------
+| Import Functions
+|--------------------------------------------------------------------------
+| This file is responsible for loading all the functions in the app/Functions.php
+| file.
+|
+*/
+require_once 'app/lib/Functions.php';
+
+/*
+|--------------------------------------------------------------------------
+| Initialize the console application
+|--------------------------------------------------------------------------
+| This class is responsible for initializing the console application.
+|
+*/
+(new App\Console\Engine)->run();
+(new App\Console\Helpers)->write('');
