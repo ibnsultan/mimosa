@@ -60,7 +60,7 @@ Basic Routing
 
 ```php
 app->get('/', function(){
-	echo 'hello world!';
+  echo 'hello world!';
 });
 ```
 
