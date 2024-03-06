@@ -2,9 +2,9 @@
 
 namespace App\Controllers;
 
-use App\Mvc;
+use App\Controller;
 
-class HomeController extends Mvc
+class HomeController extends Controller
 {
     public function index()
     {
@@ -14,7 +14,7 @@ class HomeController extends Mvc
             'description' => 'This is a framework designed to seamlessly integrate PHP and ReactJS without the need for complete separation between frontend and backend layers.'            
         ];
 
-        return $this->render('Home', $data);
+        render('Home', $data);
 
     }
 
