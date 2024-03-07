@@ -2,26 +2,11 @@
 
 namespace App\Console;
 
-use Illuminate\Database\Capsule\Manager as Capsule;
-
 class Engine extends \App\Console\Helpers
 {    
-    protected $value;
-    protected $option;
-    protected $command;
-
-    protected $helpers;
-
-    public $color_red = "\033[31m";
-    public $color_blue = "\033[34m";
-    public $color_green = "\033[32m";
-    public $color_yellow = "\033[33m";
-    public $color_reset = "\033[0m";
-
     public function __construct()
-    {        
-        $this->write('');
-        $this->parseArguments();
+    {
+        parent::__construct();
     }
 
     public function run() :void
@@ -32,29 +17,11 @@ class Engine extends \App\Console\Helpers
             case 'init': $this->init(); break;
             case 'serve': $this->serve(); break;
             case 'model': $this->model(); break;
+            case 'screen': $this->screen(); break;
             case 'controller': $this->controller(); break;
-            case 'migration': $this->migration(); break;
             default: $this->showHelp();
         }
 
-    }
-
-    protected function parseArguments() :void
-    {
-        
-        $arguments = array_slice($_SERVER['argv'], 1);
-
-        $this->value = $arguments[1] ?? null;
-
-        if (count($arguments) >= 1):
-            $arguments = explode(':', $arguments[0]);
-
-            $this->command = $arguments[0];
-            $this->option = $arguments[1] ?? null;
-        
-            else: exit( $this->showHelp() );
-            
-        endif;
     }
 
     public function init() :void
@@ -125,96 +92,10 @@ class Engine extends \App\Console\Helpers
         // Implement the logic for the "model" command
         switch ($this->option) {
             case 'list': $this->listClasses('/app/models', 'Models'); break;
-            case 'create': $this->createModel(); break;
-            case 'delete': $this->deleteModel(); break;
+            case 'create': (new \App\Console\Model)->createModel(); break;
+            case 'delete': (new \App\Console\Model)->deleteModel(); break;
             default: $this->helpModel(); break;
         }
-    }
-
-    protected function createModel(): void
-    {
-        $model = $this->value;
-        $modelFile = getcwd().'/app/models/'.$model.'.php';
-
-        if (file_exists($modelFile)) {
-            $this->write("The model already exists!");
-            return;
-        }
-
-        $table = strtolower($model);
-
-        // Get the table structure
-        $tableStructure = '';
-        
-        // TODO: Generate the table structure for Table creation
-        /*
-        $schemaStructures = require_once getcwd() . '/configs/database/structure/'. env('DB_DRIVER') .'.php';
-
-        if (Capsule::schema()->hasTable($table)) {
-            $columns = Capsule::schema()->getColumnListing($table);
-            foreach ($columns as $column) {
-                $tableStructure .= "\t\t\t\t\$table->" . $this->getColumnDefinition($table, $column, $schemaStructures) . ";" . PHP_EOL;
-            }
-        }*/
-
-        // Generate the model content
-        $content = "<?php\n\nnamespace App\Models;\n\nuse Illuminate\Database\Capsule\Manager as Capsule;\nuse Illuminate\Database\Schema\Blueprint;\n\nuse Illuminate\Database\Eloquent\Model;\n\n";
-        $content .= "class $model extends Model\n{\n";
-        $content .= "\tprotected \$table = '$table';\n\n";
-        $content .= "\tpublic function __construct()\n\t{\n";
-        $content .= "\t\t\$this->createTableIfNotExists();\n";
-        $content .= "\t}\n\n";
-        $content .= "\tpublic function createTableIfNotExists()\n\t{\n";
-        $content .= "\t\tif (!Capsule::schema()->hasTable(\$this->table)) {\n";
-        $content .= "\t\t\tCapsule::schema()->create('$table', function (Blueprint \$table) {\n\n\n";
-        $content .= "\t\t\t\t// Write your table structure here\n\n\n";
-        // $content .= $tableStructure; ref TODO:
-        $content .= "\t\t\t});\n";
-        $content .= "\t\t}\n";
-        $content .= "\t}\n}";
-        
-        // Write the model file
-        file_put_contents($modelFile, $content);
-        
-        $this->write("The model $model has been created successfully!");
-    }
-
-    protected function getColumnDefinition(string $table, string $column, $schemaStructures): string
-    {
-        $columnType = Capsule::schema()->getColumnType($table, $column);
-
-        // die(var_dump($schemaStructures));
-
-        if (array_key_exists($columnType, $schemaStructures)) {
-            $response = $schemaStructures[$columnType]['type'];
-
-            if(isset($schemaStructures[$columnType]['length'])) :
-
-                $response .= "('$column', ".$schemaStructures[$columnType]['length'].")";
-                else: $response .= "('$column')";
-
-            endif;
-
-            return "$response";
-        }
-
-        return "\t\t\tcolumnType('$column')";
-        
-    }
-
-
-    protected function deleteModel() :void
-    {
-        $model = $this->value;
-        $modelFile = getcwd().'/app/models/'.$model.'.php';
-
-        if (!file_exists($modelFile)) {
-            $this->write("The model does not exist!");
-            return;
-        }
-
-        unlink($modelFile);
-        $this->write("The model $model has been deleted successfully!");
     }
 
     protected function helpModel() :void
@@ -302,6 +183,16 @@ class Engine extends \App\Console\Helpers
         );
     }
 
+    protected function screen() :void
+    {
+        switch ($this->option) {
+            case 'list': ''; break;
+            case 'create': (new \App\Console\Screen)->createScreen(); break;
+            case 'delete': (new \App\Console\Screen)->deleteScreen(); break;
+            default: (new \App\Console\Screen)->helpScreen(); break;
+        }
+    }
+
     protected function listClasses($path, $type) :void
     {
         $classes = array_diff(scandir(getcwd().$path), ['.', '..']);
@@ -311,36 +202,6 @@ class Engine extends \App\Console\Helpers
             $this->write("$this->color_blue  $class $this->color_reset \t\t $path/$class");
         }
     }
-
-    protected function migration() :void
-    {
-        switch ($this->option) {
-            case 'list': $this->listClasses('/app/migrations', 'Migrations'); break;
-            case 'create': $this->createMigration(); break;
-            //case 'run': $this->runMigration(); break;
-            default: $this->helpModel(); break;
-        }
-    }
-
-    protected function createMigration() :void
-    {
-        /*$migration = $this->value;
-        $migrationFile = getcwd().'/app/migrations/'.date('Y_m_d_His').'_'.$migration.'.php';
-
-        if (file_exists($migrationFile)) {
-            $this->write("The migration already exists!");
-            return;
-        }
-
-        $content = "<?php\n\nuse Phinx\Migration\AbstractMigration;\n\nclass $migration extends AbstractMigration\n{\n\tpublic function change()\n\t{\n\t\t// Write your migration here\n\t}\n}";
-
-        file_put_contents($migrationFile, $content);
-        $this->write("The migration $migration has been created successfully!");*/
-
-        shell_exec("php vendor/bin/phinx create $this->value -c configs/phinx.php");
-    }
-
-
 
     protected function showHelp() :void
     {
