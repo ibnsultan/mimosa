@@ -6,7 +6,8 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 
 class Database
 {
-    public static function Initialize()
+
+    public static function default()
     {
         
         $capsule = new Capsule;
@@ -20,8 +21,11 @@ class Database
             'collation' => 'utf8_unicode_ci',
             'prefix'    => env('DB_PREFIX', ''),
         ]);
+        
         $capsule->setAsGlobal();
         $capsule->bootEloquent();
+
+        return $capsule;
     }
 
     public static function Close()
