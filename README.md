@@ -13,8 +13,14 @@ composer create-project ibnsultan/mimosa YOUR_PROJECT_NAME
 ```
 📁 project/
 ├── 📁 app/
+|   ├── 📁 console/
+|   |	├── 🐘 Engine.php
+|   |	├── 🐘 Helpers.php
+|   |	├── 🐘 Model.php
+|   |	└── 🐘 Screen.php
 │   ├── 📁 controllers/
 │   ├── 📁 lib/
+|   |	├── 🐘 Database.php
 │   │   └── 🐘 Functions.php
 │   ├── 📁 routes/
 │   │   ├── 🐘 app.php
@@ -29,6 +35,10 @@ composer create-project ibnsultan/mimosa YOUR_PROJECT_NAME
 │   │       └── 📁 components/
 │   │           └── ⚛️ global.blade.jsx
 │   └── 🐘 Controller.php
+├── 📁 config/
+|   ├── 📁 database/
+|   |	└── 🐘 <databaseDriver>.php
+|   └── 🐘 app.php
 ├── 📁 public/
 │   ├── 📁 assets/
 │   ├── ⚙️ .htaccess
@@ -37,7 +47,8 @@ composer create-project ibnsultan/mimosa YOUR_PROJECT_NAME
 ├── ⚙️ .env
 ├── ⚙️ .htaccess
 ├── 📎 composer.json
-└── 📄 index.php
+├── 🐘 index.php
+└── 📄 mimic
 ```
 
 ## Features
@@ -48,7 +59,7 @@ composer create-project ibnsultan/mimosa YOUR_PROJECT_NAME
 - [ ] Authorization & Authentication
 - [ ] Database
   - [X] Models
-  - [ ] Migrations
+  - [X] Migrations
 
 ## Basic Usage
 
