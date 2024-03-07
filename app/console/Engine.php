@@ -179,7 +179,7 @@ class Engine extends \App\Console\Helpers
             "Usage:",
             "   controller:list",
             "   controller:create [name]",
-            "   controller:delete [name]"
+            "   controller:delete [name]",
         );
     }
 
@@ -208,14 +208,14 @@ class Engine extends \App\Console\Helpers
 
         $this->write(
             "$this->color_green",
-            "Mimosa Cli Console $this->color_reset",
-            "Usage: php console [command] [option]",
-            "Commands:",
-            "  make:controller [name]  Create a new controller",
-            "  make:model [name]       Create a new model",
-            "  make:migration [name]   Create a new migration",
-            "  make:seed [name]        Create a new seed"
+            "Mimosa Cli Console $this->color_reset " .$this->color_red. "v0.0.1-Alpha" .$this->color_reset,
+            "Usage: php mimic [command] [option]",
         );
+
+        $this->helpKey();
+        $this->helpModel();
+        $this->helpController();
+        (new \App\Console\Screen)->helpScreen();
 
     }
 
