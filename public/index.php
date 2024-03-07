@@ -50,7 +50,7 @@ Dotenv\Dotenv::createImmutable(getcwd())->safeLoad();
 | and then shut down when the application is finished.
 |
 */
-App\Lib\Database::Initialize();
+define('DB', (App\Lib\Database::default()) ?? null);
 
 /*
 |--------------------------------------------------------------------------
