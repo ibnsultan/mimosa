@@ -23,6 +23,29 @@ function load_dir_files($directory) {
 
 }
 
+/*
+|--------------------------------------------------------------------------
+| Delete Directory and its contents
+|--------------------------------------------------------------------------
+| This function is used to delete a directory and its contents
+| 
+*/
+function delete_dir($dirPath) {
+    if (is_dir($dirPath)) {
+        $files = scandir($dirPath);
+        foreach ($files as $file) {
+           if ($file !== '.' && $file !== '..') {
+              $filePath = $dirPath . '/' . $file;
+              if (is_dir($filePath)) {
+                    delete_dir($filePath);
+              } else {
+                 unlink($filePath);
+              }
+           }
+        }
+        rmdir($dirPath);
+     }
+}
 
 /*
 |--------------------------------------------------------------------------
