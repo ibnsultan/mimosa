@@ -1,5 +1,36 @@
 <?php
 
+/**
+ * Mimosa - A PHP+reactJS Framework For Web
+ * ------------------------------------------------------------------------------------
+ * Console Engine : app/console/Engine.php
+ * ------------------------------------------------------------------------------------
+ * 
+ * This class is responsible for managing the console commands in your application.
+ * 
+ * Author: Abdulbasit Rubeiyya
+ * Last Updated: 8 March 2024
+ * 
+ * 
+ * Class Methods:
+ *      - run() :void
+ *      - init() :void
+ *      - key() :void
+ *      - showKey() :void
+ *      - generateKey() :void
+ *      - helpKey() :void
+ *      - serve() :void
+ *      - model() :void
+ *      - createController() :void
+ *      - deleteController() :void
+ *      - helpController() :void
+ *      - screen() :void
+ *      - listClasses($path, $type) :void
+ *      - showHelp() :void
+ *       
+ * TODO: Separate Controller management to a separate class
+ */
+
 namespace App\Console;
 
 class Engine extends \App\Console\Helpers
@@ -122,15 +153,17 @@ class Engine extends \App\Console\Helpers
 
     protected function createController(): void
     {
-        $controller = ucfirst($this->value);
+        
+        $this->write($this->color_blue. "Creating the controller... $this->color_reset");
+
+        $controller = ucfirst($this->value ?? $this->prompt("Enter the Controller name"));
+        ($controller == '') ? exit : null;
 
         if (strtolower(substr($controller, -10)) != 'controller') {
             $controller .= 'Controller';
         }
 
         $controllerFile = getcwd().'/app/controllers/'.$controller.'.php';
-
-        $this->write($this->color_blue. "Creating the controller... $this->color_reset");
 
         if (file_exists($controllerFile)) {
             $this->write(
@@ -140,7 +173,29 @@ class Engine extends \App\Console\Helpers
             return;
         }
 
-        $content = "<?php\n\nnamespace App\Controllers;\n\nclass $controller extends \\App\\Controller\n{\n\tpublic function __construct()\n\t{\n\t\tparent::__construct();\n\t}\n}";
+        // $content = "<?php\n\nnamespace App\Controllers;\n\nclass $controller extends \\App\\Controller\n{\n\tpublic function __construct()\n\t{\n\t\tparent::__construct();\n\t}\n}";
+
+        $content =<<<DATA
+        <?php
+
+        namespace App\Controllers;
+
+        class $controller extends \App\Controller
+        {
+
+            public function __construct()
+            {
+                parent::__construct();
+            }
+
+            public function index()
+            {
+                // happy coding ...
+            }
+
+        }
+
+        DATA;
 
         file_put_contents($controllerFile, $content);
         $this->write(
@@ -152,10 +207,14 @@ class Engine extends \App\Console\Helpers
 
     protected function deleteController() :void
     {
-        $controller = $this->value;
+        
+        $this->write($this->color_blue. "Deleting the controller... $this->color_reset");
+
+        $controller = $this->value ?? $this->prompt("Enter the Controller name");
+        ($controller == '') ? exit : null;
+
         $controllerFile = getcwd().'/app/controllers/'.$controller.'.php';
 
-        $this->write($this->color_blue. "Deleting the controller... $this->color_reset");
 
         if (!file_exists($controllerFile)) {
             $this->write(
