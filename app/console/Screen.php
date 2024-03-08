@@ -1,5 +1,26 @@
 <?php
 
+/**
+ * Mimosa - A PHP+reactJS Framework For Web
+ * ------------------------------------------------------------------------------------
+ * Screens Generator : app/console/Model.php
+ * ------------------------------------------------------------------------------------
+ * 
+ * This class is responsible for generating and managing the screens in your application.
+ * 
+ * Author: Abdulbasit Rubeiyya
+ * Last Updated: 8 March 2024
+ * 
+ * 
+ * Class Methods:
+ *      - createScreen() :void
+ *      - deleteScreen() :void
+ *      - helpScreen() :void
+ *      - createScreenController() :void
+ *      - addScreenRoute() :void
+ * 
+ */
+
 namespace App\Console;
 
 class Screen extends \App\Console\Helpers
