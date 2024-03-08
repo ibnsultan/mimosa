@@ -1,3 +1,3 @@
 <?php
 
-app->get('/', 'HomeController@index');
+app->get('', 'PublicController@home');
