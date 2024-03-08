@@ -1,5 +1,24 @@
 <?php
 
+/**
+ * Mimosa - A PHP+reactJS Framework For Web
+ * ------------------------------------------------------------------------------------
+ * Console Helpers : app/console/Helpers.php
+ * ------------------------------------------------------------------------------------
+ * 
+ * This class is responsible for providing helper methods to the console commands.
+ * 
+ * Author: Abdulbasit Rubeiyya
+ * Last Updated: 8 March 2024
+ * 
+ * 
+ * Class Methods:
+ *     - write() :void
+ *     - prompt($query) :mixed
+ *     - updateConfig($key, $value) :void
+ *     
+ */
+
 namespace App\Console;
 
 class Helpers
