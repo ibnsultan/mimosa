@@ -19,16 +19,12 @@
         const { StrictMode } = React;
 
         @include('layouts.components.global');
-        @if(!is_null($screenComponents)) @include($screenComponents); @endif
+        @if(isset($screenComponents)) @include($screenComponents); @endif
 
         const App = () => { return ( <> @yield('jsx') </> ); };
-
+ 
 		const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(
-            <StrictMode>
-                <App />
-            </StrictMode>
-        );
+        root.render( <StrictMode> <App /> </StrictMode> );
 
     </script>
 </body>
