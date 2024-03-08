@@ -8,7 +8,8 @@
         "ibnsultan/whoops": "dev-master",
         "leafs/router": "^0.2.3",
         "illuminate/database": "^10.47",
-        "jenssegers/blade": "^2.0"
+        "jenssegers/blade": "^2.0",
+        "fakerphp/faker": "^1.23"
     },
     "autoload": {
         "psr-4": {
