@@ -1,5 +1,27 @@
 <?php
 
+/**
+ * Mimosa - A PHP+reactJS Framework For Web
+ * ------------------------------------------------------------------------------------
+ * Model Generator : app/console/Model.php
+ * ------------------------------------------------------------------------------------
+ * 
+ * This class is responsible for generating and managing the models in your application.
+ * 
+ * Author: Abdulbasit Rubeiyya
+ * Last Updated: 8 March 2024
+ * 
+ * 
+ * Class Methods:
+ *      - createModel() :void
+ *      - deleteModel() :void
+ *      - getColumnDefinition(string $table, $column, $schemaStructures) :string
+ *      - getFillables() :string
+ *      - getHidden() :string
+ *      - getCasts() :string
+ * 
+ */
+
 namespace App\Console;
 
 use Illuminate\Database\Capsule\Manager as DB;
@@ -15,7 +37,9 @@ class Model extends \App\Console\Helpers
     {
         $this->write($this->color_blue."Creating the model... ".$this->color_reset);
 
-        $model = $this->value;
+        $model = ucfirst($this->value ?? $this->prompt("Enter the model name"));
+        ($model == '') ? exit : null;
+
         $modelFile = getcwd().'/app/models/'.$model.'.php';
 
         if (file_exists($modelFile)) {
@@ -29,42 +53,62 @@ class Model extends \App\Console\Helpers
         $fillable = $this->getFillables();
         $hidden = $this->getHidden();
 
+        $casts = $this->getCasts();
+
         // Get the table structure
-        $tableStructure = "\n\t\t\t\t// Your Table structure\n\n";
+        $tableStructure = "// Your Table structure here ...";
         
         $schemaStructures = require_once getcwd() . '/configs/database/structure/'. env('DB_DRIVER') .'.php';
 
         if (DB::schema()->hasTable($table)) {
-            $tableStructure = '';
+            $tableStructure = "\n\t\t\t\t// TODO: Warning - please review the structure of the table if matches your table structure\n";
             $columns = DB->getConnection()->select("DESCRIBE $table");
             foreach ($columns as $column) {
                 $tableStructure .= "\t\t\t\t\$table->" . $this->getColumnDefinition($table, $column, $schemaStructures) . ";" . PHP_EOL;
             }
         }
 
-        // TODO: I know this part here is scary 😂, will refine it
-        // Generate the model content
-        $content = "<?php\n\nnamespace App\Models;\n\nuse Illuminate\Database\Schema\Blueprint;\nuse Illuminate\Database\Eloquent\Model;\nuse Illuminate\Database\Capsule\Manager as DB;\n\n";
-        $content .= "class $model extends Model\n{\n";
-        $content .= "\tprotected \$table = '$table';\n\n";
-        $content .= "$fillable\n";
-        $content .= "$hidden\n\n";
-        $content .= "\tpublic function __construct()\n\t{\n";
-        $content .= "\t\t\$this->up();\n";
-        $content .= "\t}\n\n";
-        $content .= "\tpublic function up()\n\t{\n";
-        $content .= "\t\tif (!DB::schema()->hasTable(\$this->table)) {\n";
-        $content .= "\t\t\tDB::schema()->create('$table', function (Blueprint \$table) {\n";
-        $content .= $tableStructure;
-        $content .= "\t\t\t});\n";
-        $content .= "\t\t}\n";
-        $content .= "\t}\n";
-        $content .= "\n\tpublic function down()\n\t{\n";
-        $content .= "\t\tif (DB::schema()->hasTable(\$this->table)) {\n";
-        $content .= "\t\t\tDB::schema()->dropIfExists(\$this->table);\n";
-        $content .= "\t\t}\n";
-        $content .= "\t}\n";
-        $content .= "}\n";
+        $content =<<<DATA
+        <?php
+
+        namespace App\Models;
+
+        use Illuminate\Database\Schema\Blueprint;
+        use Illuminate\Database\Eloquent\Model;
+        use Illuminate\Database\Capsule\Manager as DB;
+
+        class $model extends Model
+        {
+            protected \$table = '$table';
+
+            $hidden
+            $fillable
+
+            $casts
+
+            public function __construct()
+            {
+                \$this->up();
+            }
+
+            public function up()
+            {
+                if (!DB::schema()->hasTable(\$this->table)) {
+                    DB::schema()->create(\$this->table, function (Blueprint \$table) {
+                        $tableStructure
+                    });
+                }
+            }
+
+            public function down()
+            {
+                if (DB::schema()->hasTable(\$this->table)) {
+                    DB::schema()->dropIfExists(\$this->table);
+                }
+            }
+        }
+
+        DATA;
         
         
         // Write the model file
@@ -79,12 +123,19 @@ class Model extends \App\Console\Helpers
     protected function getColumnDefinition(string $table, $column, $schemaStructures) :string
     {
 
+        // die(var_dump($column));
+
         $columnType = $column->Type;
         $maxLength = null;
         $defaultValue = null;
         
         ($column->Null == 'YES') ? $isNullable = '->nullable()' : $isNullable = null;
 
+        if(count(explode(' ', $column->Type)) > 1) {
+            $columnType = $column->Type = explode(' ', $column->Type)[0];
+
+            // die(var_dump($columnType));
+        }
 
         // determine if columnType has length is enum
         if(substr($columnType, -1) == ')') {
@@ -119,7 +170,12 @@ class Model extends \App\Console\Helpers
 
         if (array_key_exists($columnType, $schemaStructures)) {
 
-            $columnType = $schemaStructures[$columnType]['type'];
+            // check if columnType has autoincrement
+            if ($column->Extra == 'auto_increment') {
+                $columnType = $schemaStructures[$columnType]['onIncrement'];
+            }else{
+                $columnType = $schemaStructures[$columnType]['type'];
+            }
 
             return  "$columnType('$column->Field'$maxLength){$defaultValue}$isNullable";
             
@@ -133,9 +189,9 @@ class Model extends \App\Console\Helpers
     {
         $data = $this->prompt("Enter the fillable columns (comma separated)");
 
-        ($data) ? $fillables = json_encode(explode(',', $data)) : $fillables = '[]';
+        ($data) ? $fillables = json_encode(array_map('trim', explode(',', $data))) : $fillables = '[]';
 
-        return "\tprotected \$fillable = $fillables;";        
+        return "protected \$fillable = $fillables;";        
 
     }
 
@@ -143,16 +199,48 @@ class Model extends \App\Console\Helpers
     {
         $data = $this->prompt("Enter the hidden columns (comma separated)");
 
-        ($data) ? $hidden = json_encode(explode(',', $data)) : $hidden = '[]';
+        ($data) ? $hidden = json_encode(array_map('trim', explode(',', $data))) : $hidden = '[]';
 
-        return "\tprotected \$hidden = $hidden;";        
+        return "protected \$hidden = $hidden;";        
+    }
+
+    protected function getCasts() :string
+    {
+        $this->write("Enter the casts (comma separated)");
+        $data = $this->prompt("\t Example: id:integer, email:string");
+
+        // ($data) ? $casts = json_encode(explode(',', $data), JSON_PRETTY_PRINT) : $casts = '[]';
+        ($data) ? $casts = explode(',', $data) : $casts = '[]';
+
+        if(count($casts) > 0) {
+            $casts = array_map(function($cast){
+                $cast = explode(':', $cast);
+                return "'$cast[0]' => '$cast[1]'";
+            }, $casts);
+        }
+
+        $casts = json_encode($casts, JSON_PRETTY_PRINT);
+
+        // sanitize the casts
+        $casts = str_replace(
+            ["\n" , "\"'", "'\""],
+            ["\n\t", "'", "'"],
+            $casts
+        );
+
+        // TODO: Reveiw what causes the extra white space
+        $casts = str_replace("' ", "'", $casts);
+        
+        return "protected \$casts = $casts;";
     }
 
     public function deleteModel() :void
     {
         $this->write($this->color_blue. "Deleting the model... $this->color_reset");
 
-        $model = $this->value;
+        $model = $this->value ?? $this->prompt("Enter the model name");
+        ($model == '') ? exit : null;
+
         $modelFile = getcwd().'/app/models/'.$model.'.php';
 
         if (!file_exists($modelFile)) {
