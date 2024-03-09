@@ -73,6 +73,9 @@ class Screen extends \App\Console\Helpers
         $this->write($this->color_yellow. "Writting: $this->color_reset Main.blade.php");
         file_put_contents($screenDir.'/Main.blade.php', $mainPage);
 
+        $this->write($this->color_yellow. "Writting: $this->color_reset Stylesheet.blade.jsx");
+        file_put_contents($screenDir.'/Stylesheet.blade.jsx', '');
+
         $this->write($this->color_green. "Success:$this->color_reset The screen $screenName has been created successfully!",'');
 
         $this->createScreenController();
