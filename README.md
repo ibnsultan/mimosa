@@ -38,6 +38,7 @@ composer create-project ibnsultan/mimosa YOUR_PROJECT_NAME
 ├── 📁 config/
 |   ├── 📁 database/
 |   |	└── 🐘 <databaseDriver>.php
+|   ├── 🐘 routes.php
 |   └── 🐘 app.php
 ├── 📁 public/
 │   ├── 📁 assets/
@@ -56,10 +57,15 @@ composer create-project ibnsultan/mimosa YOUR_PROJECT_NAME
 - [X] Exceptions and Error Handler
 - [X] HTTP Utils (Routing, Response, Requests)
 - [X] Autoloading
-- [ ] Authorization & Authentication
-- [ ] Database
+- [ ] Authorization & Authentication (Beta)
+  - [X] Login and Registration
+  - [X] Session based authentication
+  - [X] Token Based authentication (For API request)
+  - [ ] Pasword Reset Implentation
+- [X] Database
   - [X] Models
   - [X] Migrations
+
 
 ## Basic Usage
 
