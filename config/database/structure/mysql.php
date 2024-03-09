@@ -1,0 +1,26 @@
+<?php
+
+return [
+    'int' => ['type' => 'integer', 'length' => true , 'onIncrement' => 'increments'],
+    'tinyint' => ['type' => 'tinyInteger', 'length' => true],
+    'smallint' => ['type' => 'smallInteger', 'length' => true],
+    'mediumint' => ['type' => 'mediumInteger', 'length' => true],
+    'bigint' => ['type' => 'bigInteger', 'length' => true, 'onIncrement' => 'bigIncrements'],
+    'float' => ['type' => 'float', 'length' => true],
+    'double' => ['type' => 'double', 'length' => true],
+    'decimal' => ['type' => 'decimal', 'length' => true],
+    'date' => ['type' => 'date', 'length' => false],
+    'datetime' => ['type' => 'dateTime', 'length' => false],
+    'timestamp' => ['type' => 'timestamp', 'length' => false],
+    'time' => ['type' => 'time', 'length' => false],
+    'year' => ['type' => 'year', 'length' => false],
+    'char' => ['type' => 'char', 'length' => true],
+    'varchar' => ['type' => 'string', 'length' => true],
+    'text' => ['type' => 'text', 'length' => false],
+    'blob' => ['type' => 'blob', 'length' => false],
+    'binary' => ['type' => 'binary', 'length' => true],
+    'varbinary' => ['type' => 'binary', 'length' => true],
+    'enum' => ['type' => 'enum', 'length' => true],
+    'set' => ['type' => 'set', 'length' => true],
+    'json' => ['type' => 'json', 'length' => false],
+];
