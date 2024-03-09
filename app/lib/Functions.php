@@ -63,13 +63,40 @@ function blade(){
     $blade = new \Jenssegers\Blade\Blade($views, $cache);
 
     $blade->addExtension('blade.jsx', 'blade');
+    $blade->addExtension('blade.css', 'blade');
 
     // react initial state directive @reactInitialize
     $blade->directive('reactInitialize', function () {
-        
-        return "<?php echo '<script type=\"module\">import \"https://unpkg.com/react@18/umd/react.development.js\";import \"https://unpkg.com/react-dom@18/umd/react-dom.development.js\";import \"https://unpkg.com/@babel/standalone/babel.min.js\";</script>'; ?>";
+
+        $modulesReference = config->modules->reference;
+
+        $modulesCollection = "\n\t\t";
+        foreach($modulesReference as $module){
+            $modulesCollection .= "import * as {$module['name']} from '{$module[config->app_env]}';\n\t\t";
+        }
+
+        return <<<DATA
+        <script type="module">
+            $modulesCollection
+        \t</script>
+        DATA;
 
     });
+
+    /*$blade->directive('screenStylesheet', function ($experession) {
+
+        if(is_null($experession)) return '';
+
+        $stylesheet = config->viewsDirectory . $experession . '/Stylesheet.css';
+        //$stylesheet = file_get_contents($stylesheet);
+
+        return <<<DATA
+        <styles>
+            $stylesheet;
+        </styles>
+        DATA;
+
+    });*/
 
     return $blade;
 }
@@ -81,6 +108,7 @@ function blade(){
 | This function is used to render a view
 | 
 */
+
 function render($view, $data = []){
     $newDir = getcwd() .'/app/Views/'. str_replace('.', '/', $view);
         
@@ -90,8 +118,52 @@ function render($view, $data = []){
         $components = explode('@', $view);
         $view = str_replace('@', '.', $view); 
         $data['screenComponents'] = "$components[0].Components";
+        $data['screenStylesheet'] = "$components[0].Stylesheet";
     endif;
 
     response()->markup( (blade()->make($view, $data)) ?? '' );
 
+}
+
+/*
+|--------------------------------------------------------------------------
+| Array & Object Iterator
+|--------------------------------------------------------------------------
+| This function is used to iterate through an array or object recursively
+| and apply a callback function to each value
+|
+| @param array|object $array 
+| @return array (?key => value)
+|
+*/
+
+function object_array_iterator($array, $callback='trim') {
+    foreach ($array as $key => $value) {
+        if (is_array($value) || is_object($value)) {
+            object_array_iterator($value, $callback);
+        } else {
+            $array[$key] = $callback($value);
+        }
+    }
+    return $array;
+}
+
+function get_screen_stylesheet($screen){
+
+}
+
+function auth(){
+    $auth =  new \Leaf\Auth;
+    $auth->connect(
+        config->db_host,
+        config->db_name,
+        config->db_user,
+        config->db_pass,
+        config->db_driver
+    );
+
+    $auth->useSession();
+    $auth->config('TOKEN_SECRET', config->app_key);
+
+    return $auth;
 }
