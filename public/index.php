@@ -73,7 +73,6 @@ require_once 'app/lib/Functions.php';
 */
 define('app', (new class extends Leaf\Router {}) ?? null);
 
-
 /*
 |--------------------------------------------------------------------------
 | Load routing files
@@ -83,6 +82,7 @@ define('app', (new class extends Leaf\Router {}) ?? null);
 | will be loaded as well.
 |
 */
+(new \App\Helpers\RouteAccess)->authorized();
 load_dir_files('app/routes');
 
 /*
