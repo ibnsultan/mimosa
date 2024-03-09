@@ -2,6 +2,10 @@
 	overflow: hidden;
 }
 
+*{
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 .main{
 	margin-top: 30vh;
 	text-align: center;
@@ -38,7 +42,6 @@ nav{
 nav>ul>li{
 	display: inline;
 	margin-right: 20px;
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 nav>ul>li:first-child{
@@ -55,4 +58,14 @@ nav>ul>li>a{
 	color: #44be6d;
 	font-weight: bold;
 	cursor: pointer;
+}
+
+a{
+	text-decoration: none;
+	color: #44be6d;
+	font-weight: bold;
+}
+
+a:hover{
+	color: #0ca23e;
 }
