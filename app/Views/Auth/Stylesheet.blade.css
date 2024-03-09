@@ -1,0 +1,100 @@
+body{
+    background: #f3f4f6;
+}
+
+.formContainer{
+    width: 95%;
+    max-width: 400px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 2rem 3rem;
+}
+
+.registerForm{
+    margin: 10vh auto 0;
+}
+
+.loginForm{
+    margin: 20vh auto 0;
+}
+
+label{
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #00000090;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.inputGroup{
+    margin-bottom: 1rem;
+    padding: 2px;
+    width: 100%;
+}
+
+.formControl{
+    width: 100%;
+    border: solid 1px #00000090;
+    border-radius: 5px;
+    height: 40px;
+    padding-left: 10px;
+}
+
+.btn{
+    height: 40px;
+    min-width: 100px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.btn-primary{
+    background-color: #2491e8;
+    color: white;
+}
+
+.btn-primary:hover{
+    background-color: #1c7dbf;
+}
+
+.w-50{
+    width: 50%;
+}
+
+.m-auto{
+    margin:auto;
+}
+
+.formButton{    
+    text-align: center;
+    margin-top: 1rem;
+}
+
+[type="password"]::placeholder{
+    font-size: 30px;
+}
+
+.formIntro{
+    text-align: center;
+    padding: 0;
+}
+
+.logoImage{
+    width: 60px;
+    height: auto;
+    margin: auto;
+    background-color: #f3f4f6;
+    border-radius: 5px;
+}
+
+.logoText{
+    font-family: cursive;
+}
+
+.text-left{
+    text-align: left;
+}
+
+.text-right{
+    text-align: right;
+}
