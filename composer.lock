@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6b85a62265018f32d245bc93245f1275",
+    "content-hash": "66c4e2a2100dc1cbaef390f457ca27ac",
     "packages": [
         {
             "name": "brick/math",
@@ -1260,6 +1260,210 @@
             "time": "2023-07-09T00:51:55+00:00"
         },
         {
+            "name": "leafs/auth",
+            "version": "v2.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/leafsphp/auth.git",
+                "reference": "8844171fd936db73568333a4529a85fc1a0af912"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/leafsphp/auth/zipball/8844171fd936db73568333a4529a85fc1a0af912",
+                "reference": "8844171fd936db73568333a4529a85fc1a0af912",
+                "shasum": ""
+            },
+            "require": {
+                "leafs/date": "*",
+                "leafs/db": "*",
+                "leafs/form": "*",
+                "leafs/http": "*",
+                "leafs/password": "*",
+                "leafs/session": "*"
+            },
+            "require-dev": {
+                "leafs/alchemy": "^1.0",
+                "pestphp/pest": "^1.0 | ^2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/functions.php"
+                ],
+                "psr-4": {
+                    "Leaf\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Darko",
+                    "email": "mickdd22@gmail.com",
+                    "homepage": "https://mychi.netlify.app",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Leaf PHP auth helper",
+            "homepage": "https://leafphp.netlify.app/#/",
+            "keywords": [
+                "Authentication",
+                "framework",
+                "leaf",
+                "login",
+                "php",
+                "register",
+                "simple auth"
+            ],
+            "support": {
+                "issues": "https://github.com/leafsphp/auth/issues",
+                "source": "https://github.com/leafsphp/auth/tree/v2.3.2"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/leafsphp",
+                    "type": "github"
+                },
+                {
+                    "url": "https://opencollective.com/leaf",
+                    "type": "open_collective"
+                }
+            ],
+            "time": "2023-10-06T17:53:01+00:00"
+        },
+        {
+            "name": "leafs/date",
+            "version": "v2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/leafsphp/date.git",
+                "reference": "ba85333fd07348f1e06b775d226ec23c991e8285"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/leafsphp/date/zipball/ba85333fd07348f1e06b775d226ec23c991e8285",
+                "reference": "ba85333fd07348f1e06b775d226ec23c991e8285",
+                "shasum": ""
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.14",
+                "leafs/alchemy": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/functions.php"
+                ],
+                "psr-4": {
+                    "Leaf\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Darko",
+                    "email": "mickdd22@gmail.com",
+                    "homepage": "https://mychi.netlify.app",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Leaf PHP date module",
+            "homepage": "https://leafphp.netlify.app/#/",
+            "keywords": [
+                "date",
+                "datetime",
+                "framework",
+                "leaf",
+                "php",
+                "time"
+            ],
+            "support": {
+                "issues": "https://github.com/leafsphp/date/issues",
+                "source": "https://github.com/leafsphp/date/tree/v2.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/leafsphp",
+                    "type": "github"
+                },
+                {
+                    "url": "https://opencollective.com/leaf",
+                    "type": "open_collective"
+                }
+            ],
+            "time": "2023-04-02T18:53:25+00:00"
+        },
+        {
+            "name": "leafs/db",
+            "version": "v2.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/leafsphp/db.git",
+                "reference": "6d7cad817a524abb898f81a3642e83ba930e8081"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/leafsphp/db/zipball/6d7cad817a524abb898f81a3642e83ba930e8081",
+                "reference": "6d7cad817a524abb898f81a3642e83ba930e8081",
+                "shasum": ""
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.14",
+                "leafs/alchemy": "^1.0",
+                "pestphp/pest": "^1.21"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/functions.php"
+                ],
+                "psr-4": {
+                    "Leaf\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Darko",
+                    "email": "mickdd22@gmail.com",
+                    "homepage": "https://mychi.netlify.app",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Leaf PHP db module.",
+            "homepage": "https://leafphp.dev/modules/db/",
+            "keywords": [
+                "database",
+                "framework",
+                "leaf",
+                "orm",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/leafsphp/db/issues",
+                "source": "https://github.com/leafsphp/db/tree/v2.1.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/leafsphp",
+                    "type": "github"
+                },
+                {
+                    "url": "https://opencollective.com/leaf",
+                    "type": "open_collective"
+                }
+            ],
+            "time": "2023-08-03T20:59:45+00:00"
+        },
+        {
             "name": "leafs/form",
             "version": "v2.1",
             "source": {
@@ -1393,6 +1597,60 @@
             "time": "2023-08-24T22:52:10+00:00"
         },
         {
+            "name": "leafs/password",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/leafsphp/password.git",
+                "reference": "f720c3b18c6c6efeaeb67d1cfad336febd4c7f94"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/leafsphp/password/zipball/f720c3b18c6c6efeaeb67d1cfad336febd4c7f94",
+                "reference": "f720c3b18c6c6efeaeb67d1cfad336febd4c7f94",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Leaf\\Helpers\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Darko",
+                    "email": "mickdd22@gmail.com",
+                    "homepage": "https://mychi.netlify.app",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Leaf PHP password helper",
+            "homepage": "https://leafphp.netlify.app/#/",
+            "keywords": [
+                "framework",
+                "leaf",
+                "php",
+                "simple templating",
+                "template",
+                "view"
+            ],
+            "support": {
+                "issues": "https://github.com/leafsphp/password/issues",
+                "source": "https://github.com/leafsphp/password/tree/v1.0"
+            },
+            "funding": [
+                {
+                    "url": "https://opencollective.com/leaf",
+                    "type": "open_collective"
+                }
+            ],
+            "time": "2021-09-19T12:27:19+00:00"
+        },
+        {
             "name": "leafs/router",
             "version": "v0.2.3",
             "source": {
@@ -1455,6 +1713,74 @@
                 }
             ],
             "time": "2023-06-30T09:40:09+00:00"
+        },
+        {
+            "name": "leafs/session",
+            "version": "v2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/leafsphp/session.git",
+                "reference": "917f7919a95191372a5b6860061d1c1c19c5c8b7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/leafsphp/session/zipball/917f7919a95191372a5b6860061d1c1c19c5c8b7",
+                "reference": "917f7919a95191372a5b6860061d1c1c19c5c8b7",
+                "shasum": ""
+            },
+            "require": {
+                "leafs/anchor": "*"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.0",
+                "pestphp/pest": "^1.21"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/functions.php"
+                ],
+                "psr-4": {
+                    "Leaf\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Darko",
+                    "email": "mickdd22@gmail.com",
+                    "homepage": "https://mychi.netlify.app",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Leaf PHP session + flash modules",
+            "homepage": "https://leafphp.dev/modules/session/",
+            "keywords": [
+                "flash",
+                "framework",
+                "http",
+                "leaf",
+                "php",
+                "session"
+            ],
+            "support": {
+                "issues": "https://github.com/leafsphp/session/issues",
+                "source": "https://github.com/leafsphp/session/tree/v2.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/leafsphp",
+                    "type": "github"
+                },
+                {
+                    "url": "https://opencollective.com/leaf",
+                    "type": "open_collective"
+                }
+            ],
+            "time": "2023-07-09T16:59:55+00:00"
         },
         {
             "name": "nesbot/carbon",

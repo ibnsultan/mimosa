@@ -9,7 +9,8 @@
         "leafs/router": "^0.2.3",
         "illuminate/database": "^10.47",
         "jenssegers/blade": "^2.0",
-        "fakerphp/faker": "^1.23"
+        "fakerphp/faker": "^1.23",
+        "leafs/auth": "^2.3"
     },
     "autoload": {
         "psr-4": {
