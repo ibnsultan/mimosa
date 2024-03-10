@@ -13,8 +13,8 @@ class RouteAccess
     protected $users;
     protected $errors;
 
+    protected $home = 'app';
     protected $login = 'auth/login';
-    protected $home = 'app/overview';
 
     protected $uriRules;
 
@@ -23,14 +23,12 @@ class RouteAccess
      
         $this->users = new Users;
         
-        $this->uriRules = require_once getcwd() . '/config/routes.php';
-        
         $this->uri = ltrim($_SERVER['REQUEST_URI'], '/');
 
-        # determine request type
-        if (strpos($this->uri, 'api/') != 0) {
-            $this->user = auth()->user() ?? null;
-        }
+        $this->user = auth()->user() ?? null;
+        
+        $this->uriRules = require_once getcwd() . '/config/routes.php';
+        
     }
 
     public function authorized(): bool
@@ -87,8 +85,14 @@ class RouteAccess
 
     protected function webRequestAccess($rules) :void
     {
+
         if ($rules['session'] && !$this->user) {
             exit(header("Location: /{$this->login}"));
+        }
+
+        // page guest access but user is logged in
+        if ($rules['access'] === 'guest' && $this->user) {
+            exit(header("Location: /{$this->home}"));
         }
 
         if (is_array($rules['access'])) {
@@ -105,7 +109,6 @@ class RouteAccess
     # applicable to only api requests stating with 'api/'
     protected function apiRequestAccess($rules) :void
     {
-        // die(response()->json($rules));
         
         if(!$rules['session']) {
             return;
