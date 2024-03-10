@@ -11,9 +11,9 @@ const Header = () => {
         <header>
             <nav>
                 <ul>
-                    <li><a to="javascript:void;">PHP</a></li>
-                    <li><a to="javascript:void;">MVC</a></li>
-                    <li><a to="javascript:void;">ReactJS</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="https://github.com/ibnsultan/mimosa/wiki">Documentation</a></li>
+                    <li><a href="/auth/login">Login</a></li>
                 </ul>
             </nav>
         </header>
