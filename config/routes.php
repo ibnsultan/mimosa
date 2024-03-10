@@ -12,14 +12,12 @@
  */
 return [
 
-    '' => [ 'session'=>false, 'access'=>'all' ],
-
     'auth/login' => 
         [ 'session' => false, 'access' => 'guest'],
     'auth/register' => 
         [ 'session' => false, 'access' => 'guest'],
 
-    'app' => 
+    'guard' => 
         [ 'session' => true, 'access' => 'all' ],
         
     'api/auth/{wild}' =>
@@ -27,6 +25,5 @@ return [
     
     'api/{wild}' =>
         [ 'session' =>true, 'access' => ['subscriber', 'owner', 'admin'] ]
-
 
 ];
