@@ -58,7 +58,7 @@ class Model extends \App\Console\Helpers
         // Get the table structure
         $tableStructure = "// Your Table structure here ...";
         
-        $schemaStructures = require_once getcwd() . '/configs/database/structure/'. env('DB_DRIVER') .'.php';
+        $schemaStructures = require_once getcwd() . '/config/database/structure/'. env('DB_DRIVER') .'.php';
 
         if (DB::schema()->hasTable($table)) {
             $tableStructure = "\n\t\t\t\t// TODO: Warning - please review the structure of the table if matches your table structure\n";
@@ -131,10 +131,16 @@ class Model extends \App\Console\Helpers
         
         ($column->Null == 'YES') ? $isNullable = '->nullable()' : $isNullable = null;
 
+        // determine if column is primary or unique
+        $keyType = null;
+        if($column->Key == 'PRI' and strpos($column->Extra, 'auto_increment') == false) {
+            $keyType = '->primary()';
+        }elseif($column->Key == 'UNI') {
+            $keyType = '->unique()';
+        }
+
         if(count(explode(' ', $column->Type)) > 1) {
             $columnType = $column->Type = explode(' ', $column->Type)[0];
-
-            // die(var_dump($columnType));
         }
 
         // determine if columnType has length is enum
@@ -177,11 +183,11 @@ class Model extends \App\Console\Helpers
                 $columnType = $schemaStructures[$columnType]['type'];
             }
 
-            return  "$columnType('$column->Field'$maxLength){$defaultValue}$isNullable";
+            return  "$columnType('$column->Field'$maxLength){$defaultValue}{$keyType}$isNullable";
             
         }
         
-        return  "$columnType('$column->Field'$maxLength){$defaultValue}$isNullable";
+        return  "$columnType('$column->Field'$maxLength){$defaultValue}{$keyType}$isNullable";
         
     }
 
@@ -212,14 +218,14 @@ class Model extends \App\Console\Helpers
         // ($data) ? $casts = json_encode(explode(',', $data), JSON_PRETTY_PRINT) : $casts = '[]';
         ($data) ? $casts = explode(',', $data) : $casts = '[]';
 
-        if(count($casts) > 0) {
+        if(is_array($casts) and count($casts) > 0) {
             $casts = array_map(function($cast){
                 $cast = explode(':', $cast);
                 return "'$cast[0]' => '$cast[1]'";
             }, $casts);
         }
 
-        $casts = json_encode($casts, JSON_PRETTY_PRINT);
+        (is_array($casts)) ? json_encode($casts, JSON_PRETTY_PRINT) : $casts = '[]';
 
         // sanitize the casts
         $casts = str_replace(
