@@ -17,7 +17,7 @@ return [
     'auth/register' => 
         [ 'session' => false, 'access' => 'guest'],
 
-    'guard' => 
+    'app' => 
         [ 'session' => true, 'access' => 'all' ],
         
     'api/auth/{wild}' =>
