@@ -75,6 +75,17 @@ define('app', (new class extends Leaf\Router {}) ?? null);
 
 /*
 |--------------------------------------------------------------------------
+| Routing Guard
+|--------------------------------------------------------------------------
+|
+| This class is responsible for checking if the request is authorized to access
+| a route.
+|
+*/
+(new \App\Lib\RouteAccess)->authorized();
+
+/*
+|--------------------------------------------------------------------------
 | Load routing files
 |--------------------------------------------------------------------------
 | This section is responsible for loading all the routing files in the app/routes
@@ -82,7 +93,6 @@ define('app', (new class extends Leaf\Router {}) ?? null);
 | will be loaded as well.
 |
 */
-(new \App\Helpers\RouteAccess)->authorized();
 load_dir_files('app/routes');
 
 /*
