@@ -15,9 +15,12 @@ class PublicController extends \App\Controller
 
     }
 
-    public function guard()
+    public function app()
     {
-        response()->plain('this is a protected route');
+        response()->plain(json_encode([
+            'message' => 'You\'re logged in!',
+            'userData' => auth()->user()
+        ], JSON_PRETTY_PRINT ));
     }
 
 }
