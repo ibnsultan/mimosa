@@ -19,17 +19,8 @@ return [
     'auth/register' => 
         [ 'session' => false, 'access' => 'guest'],
 
-    'app/settings' =>
-        [ 'session' => true, 'access' => ['owner', 'admin'] ],
-
-    'app/project/create' =>
-        [ 'session' => true, 'access' => ['owner', 'admin'] ],
-
-    'app/{wild}' =>
-        [ 'session' => true, 'access' => ['user', 'owner', 'admin'] ],
-
-    'admin/{any}' =>
-        [ 'session' => true, 'access' => 'admin' ],   
+    'app' => 
+        [ 'session' => true, 'access' => 'all' ],
         
     'api/auth/{wild}' =>
         [ 'session' => false, 'access' => 'guest' ],
