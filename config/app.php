@@ -16,15 +16,15 @@
 return (object)[
 
 
-/*
-|--------------------------------------------------------------------------
-| Global Environment Variables
-|--------------------------------------------------------------------------
-|
-| These are the global environment variables for the application, accessible
-| through the env() | $_ENV | $_SERVER superglobals.
-|
-*/
+    /*
+    |--------------------------------------------------------------------------
+    | Global Environment Variables
+    |--------------------------------------------------------------------------
+    |
+    | These are the global environment variables for the application, accessible
+    | through the env() | $_ENV | $_SERVER superglobals.
+    |
+    */
 
     'app_name' => env('APP_NAME', 'Mimosa'),
     'app_key' => env('APP_KEY', 'hash32:'.bin2hex(random_bytes(32))),
@@ -32,14 +32,14 @@ return (object)[
     'app_debug' => env('APP_DEBUG', true),
     'app_url' => env('APP_URL', 'http://localhost'),
 
-/*
-|--------------------------------------------------------------------------
-| Database Configuration
-|--------------------------------------------------------------------------
-|
-| These are the database configurations for the application.
-|
-*/
+    /*
+    |--------------------------------------------------------------------------
+    | Database Configuration
+    |--------------------------------------------------------------------------
+    |
+    | These are the database configurations for the application.
+    |
+    */
 
     'db_driver' => env('DB_DRIVER', 'mysql'),
     'db_host' => env('DB_HOST', 'localhost'),
@@ -50,14 +50,14 @@ return (object)[
     'db_prefix' => env('DB_PREFIX', ''),
     'db_port' => env('DB_PORT', 3306),
 
-/*
-|--------------------------------------------------------------------------
-| AutoLoaded JS Modules Configuration
-|--------------------------------------------------------------------------
-|
-| These are the configurations for the auto-loaded JS modules in the application.
-|
-*/
+    /*
+    |--------------------------------------------------------------------------
+    | AutoLoaded JS Modules Configuration
+    |--------------------------------------------------------------------------
+    |
+    | These are the configurations for the auto-loaded JS modules in the application.
+    |
+    */
 
     'modules' => (object)[
         'path' => '/assets/modules/',
@@ -66,4 +66,15 @@ return (object)[
 
 
     'viewsDirectory' => getcwd() . '/app/views/',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Auth Configuration
+    |--------------------------------------------------------------------------
+    |
+    | These are the configurations for the authentication in the application.
+    |
+    */
+
+    'auth' => require_once 'auth.php',
 ];
