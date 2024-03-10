@@ -163,7 +163,11 @@ function auth(){
     );
 
     $auth->useSession();
-    $auth->config('TOKEN_SECRET', config->app_key);
+
+    // pass auth configs recursively
+    foreach(config->auth as $key => $value){
+        $auth->config($key, $value);
+    }
 
     return $auth;
 }
