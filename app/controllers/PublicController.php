@@ -15,4 +15,9 @@ class PublicController extends \App\Controller
 
     }
 
+    public function guard()
+    {
+        response()->plain('this is a protected route');
+    }
+
 }
