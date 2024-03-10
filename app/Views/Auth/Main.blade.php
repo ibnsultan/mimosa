@@ -4,7 +4,7 @@
 
     <div className='formContainer loginForm'>
         <LoginForm
-            redirect='{{config->home}}'
+            redirect="{{config->auth['GUARD_HOME']}}"
             formTitle="{{config->app_name}}" >
         </LoginForm>
     </div>
