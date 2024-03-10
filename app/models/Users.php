@@ -31,7 +31,7 @@ class Users extends Model
 				// TODO: Warning - please review the structure of the table if matches your table structure
 				$table->bigIncrements('id', 20);
 				$table->string('fullname', 255);
-				$table->string('email', 255);
+				$table->string('email', 255)->unique();
 				$table->char('role', 50)->default('subscriber');
 				$table->text('avatar')->nullable();
 				$table->timestamp('email_verified_at')->nullable();
