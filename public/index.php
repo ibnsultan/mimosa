@@ -82,7 +82,7 @@ define('app', (new class extends Leaf\Router {}) ?? null);
 | a route.
 |
 */
-(new \App\Lib\RouteAccess)->authorized();
+(new \App\Middlewares\RouteAccess)->authorized();
 
 /*
 |--------------------------------------------------------------------------
